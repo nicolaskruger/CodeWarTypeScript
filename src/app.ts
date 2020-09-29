@@ -1,3 +1,4 @@
+//https://www.codewars.com/kata/5544c7a5cb454edb3c000047/train/typescript
 import { match } from "assert";
 export function bouncingBall(h: number, bounce: number, window: number): number {
     if(h<=window) return -1;  
