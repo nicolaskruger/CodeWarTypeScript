@@ -1,12 +1,6 @@
 export class Kata {
     static dnaStrand(dna: string) {
-        var dic:{[id:string]:string} = {
-            "A":"T",
-            "T":"A",
-            "G":"C",
-            "C":"G"
-        }
-        return dna.split("").map(s => dic[s]).join("");
+        return dna.replace(/./g, (c)=>({A:'T',T:'A',G:'C',C:'G'})[c]);
     }
   }
  
