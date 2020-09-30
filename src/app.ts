@@ -1,3 +1,4 @@
+//https://www.codewars.com/kata/56484848ba95170a8000004d/solutions/typescript
 export class G964 {
 
     public static gps = (s:number, x:Array<number>) => {
