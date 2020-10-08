@@ -4,16 +4,16 @@ class G964 {
 }
 G964.primeFactors = (n) => {
     // your code
-    let dict = new Map();
+    let dict = {};
     let num = 2;
     while (n != 1) {
         if (n % num == 0) {
             n /= num;
-            if (dict.has(num)) {
-                dict.set(num, dict.get(num) + 1);
+            if (dict[num] != undefined) {
+                dict[num]++;
             }
             else {
-                dict.set(num, 1);
+                dict[num] = 1;
             }
         }
         else {
@@ -21,16 +21,16 @@ G964.primeFactors = (n) => {
         }
     }
     let str = "";
-    dict.forEach((v, k, m) => {
-        if (v == 1) {
-            str += `(${k})`;
+    for (const key in dict) {
+        if (dict[key] == 1) {
+            str += `(${key})`;
         }
         else {
-            str += `(${k}**${v})`;
+            str += `(${key}**${dict[key]})`;
         }
-    });
+    }
     return str;
 };
 exports.G964 = G964;
-G964.primeFactors(86240);
+G964.primeFactors(7775460);
 //# sourceMappingURL=app.js.map

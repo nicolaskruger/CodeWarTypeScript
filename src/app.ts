@@ -2,29 +2,29 @@ export class G964 {
 
     public static primeFactors = (n) => {
         // your code
-        let dict=new Map<number,number>();
+        let dict:{[id:number]:number}={};
         let num =2;
         while(n!=1){
             if(n%num == 0){
                 n/=num;
-                if(dict.has(num)){
-                    dict.set(num,dict.get(num)+1);
+                if(dict[num]!=undefined){
+                    dict[num]++;
                 }else{
-                    dict.set(num,1);
+                    dict[num]=1;
                 }
             }else{
                 num++;
             }
         }
         let str:string = ""
-        dict.forEach((v,k,m) =>{
-            if(v==1){
-                str +=`(${k})`;
+        for (const key in dict) {
+            if(dict[key]==1){
+                str +=`(${key})`;
             }else{
-                str +=`(${k}**${v})`;
+                str +=`(${key}**${dict[key]})`;
             }
-        });
+        }
         return str;
     }
 }
-G964.primeFactors(86240);
+G964.primeFactors(7775460);
