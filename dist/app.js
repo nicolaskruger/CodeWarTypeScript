@@ -1,27 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
+function solequa(n) {
+    let answare = [];
+    let n_ = Math.trunc(Math.sqrt(n));
+    for (let a = 1; a <= n_; a++) {
+        if (n % a == 0) {
+            let b = n / a;
+            let x = (a + b) / 2;
+            let y = (b - a) / 4;
+            if (!Number.isInteger(x) || !Number.isInteger(y))
+                continue;
+            answare.push([x, y]);
+        }
     }
+    return answare;
 }
-G964.decompose = (n) => {
-    // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
-    }
-    return vet.reverse();
-};
-exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+exports.solequa = solequa;
+let val = solequa(12);
 //# sourceMappingURL=app.js.map
