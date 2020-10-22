@@ -1,27 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const range = (start, end) => Array.from({ length: (end - start) }, (v, k) => k + start);
 class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
+    static howmuch(m, n) {
+        // your code
+        [m, n] = n < m ? [n, m] : [m, n];
+        let func = (s, a, b) => {
+            let val = Math.trunc(s / a);
+            let les = s - a * val;
+            return val != 0 && les == b;
+        };
+        let c = range(m, n + 1).filter(s => func(s, 9, 1));
+        let b = range(m, n + 1).filter(s => func(s, 7, 2));
+        let cb = c.filter(s => b.indexOf(s) != -1);
+        return cb.map(s => {
+            return [`M: ${s}`, `B: ${Math.trunc(s / 7)}`, `C: ${Math.trunc(s / 9)}`];
+        });
     }
 }
-G964.decompose = (n) => {
-    // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
-    }
-    return vet.reverse();
-};
 exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+let l = G964.howmuch(10000, 9950);
 //# sourceMappingURL=app.js.map
