@@ -1,27 +1,42 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
+    static gcdi(x, y) {
+        // your code
+        x = Math.abs(x);
+        y = Math.abs(y);
+        if (!y) {
+            return x;
+        }
+        return G964.gcdi(y, x % y);
+    }
+    static lcmu(a, b) {
+        // your code
+        return Math.abs(a) * Math.abs(b) * G964.gcdi(a, b);
+    }
+    static som(a, b) {
+        // your code
+        return a + b;
+    }
+    static maxi(a, b) {
+        // your code
+        return a > b ? a : b;
+    }
+    static mini(a, b) {
+        // your code
+        return a < b ? a : b;
+    }
+    static operArray(fct, arr, init) {
+        // your code
+        return arr.map(s => {
+            let val = fct(init, s);
+            init = val;
+            return val;
+        });
     }
 }
-G964.decompose = (n) => {
-    // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
-    }
-    return vet.reverse();
-};
 exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+var a = [18, 69, -90, -78, 65, 40];
+let res = G964.operArray(G964.lcmu, a, a[0]);
+let r = G964.lcmu(18, 18);
 //# sourceMappingURL=app.js.map
