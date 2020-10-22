@@ -1,22 +1,17 @@
-export function findUniq(arr: number[]): number {
-    // Do the magic
-    let dic: {[key:number]:number} = {}
-    arr.forEach(s =>{
-        if(dic[s]==undefined){
-            dic[s]=1;
-        }
-        else{
-            dic[s]++;
-        }
-        return s;
-    });
+export function bTs(b:string){
+    let num =0;
+    let n = 7
+    b.split("").forEach(s => {
+        num |= Number.parseInt(s)<<n;
+        n--;
+    })
+    return String.fromCharCode(num);
+}
 
-    for (const key in dic) {
-        if (dic[key]==1) {
-            return Number.parseFloat(key);
-            
-        }
-    };
-    return 0;
-  }
-  findUniq([ 1, 1, 1, 2, 1, 1 ])
+export function binaryToString(binary: string) {
+    
+    return binary.match(/.{8}/g).map(s => bTs(s)).join("");
+    
+}
+
+let l = binaryToString("0110000101100001");

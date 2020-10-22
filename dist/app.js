@@ -1,25 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function findUniq(arr) {
-    // Do the magic
-    let dic = {};
-    arr.forEach(s => {
-        if (dic[s] == undefined) {
-            dic[s] = 1;
-        }
-        else {
-            dic[s]++;
-        }
-        return s;
+function bTs(b) {
+    let num = 0;
+    let n = 7;
+    b.split("").forEach(s => {
+        num |= Number.parseInt(s) << n;
+        n--;
     });
-    for (const key in dic) {
-        if (dic[key] == 1) {
-            return key;
-        }
-    }
-    ;
-    return 0;
+    return String.fromCharCode(num);
 }
-exports.findUniq = findUniq;
-findUniq([1, 1, 1, 2, 1, 1]);
+exports.bTs = bTs;
+function binaryToString(binary) {
+    return binary.match(/.{8}/g).map(s => bTs(s)).join("");
+}
+exports.binaryToString = binaryToString;
+let l = binaryToString("0110000101100001");
 //# sourceMappingURL=app.js.map
