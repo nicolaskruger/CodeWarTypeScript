@@ -1,24 +1,12 @@
 export class G964 {
 
-    public static stockList = (listOfArt:Array<string>, listOfCat) => {
-        // your code
-        if(listOfArt.length==0 || listOfCat.length ==0) return '';
-        let dic: {[key:string]:number} ={}
-        listOfCat.forEach(element => {
-            dic[element] = 0;
-        });
-        listOfArt.forEach(s => {
-            let key = s[0];
-            let val = Number.parseInt(s.match(/\d+/).toString());
-            if(dic[key]!=undefined){
-                dic[key]+=val;
-            }
-        });
-        let vet = []
-        for(const key in dic){
-            vet.push(`(${key} : ${dic[key]})`);
-        }
-        return vet.join(" - ");
+    public static stockList = (listOfArt, listOfCat) => {
+        if( !listOfArt.length || !listOfCat.length ) return "";
+        var count = listOfArt.reduce(function(cat, art) {
+            cat[art[0]] = ~~cat[art[0]]+ +art.split(" ")[1];
+            return cat
+        },{});
+        return listOfCat.map(function(cat){ return "(" +cat +" : " + (count[cat] || 0) + ")"; }).join(" - ");
     }
 }
 let b = ["BBAR 150", "CDXE 515", "BKWR 250", "BTSQ 890", "DRTY 600"];
