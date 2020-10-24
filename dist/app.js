@@ -1,27 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
-    }
 }
-G964.decompose = (n) => {
+G964.stockList = (listOfArt, listOfCat) => {
     // your code
+    let dic = {};
+    listOfCat.forEach(element => {
+        dic[element] = 0;
+    });
+    listOfArt.forEach(s => {
+        let key = s[0];
+        let val = Number.parseInt(s.match(/\d+/).toString());
+        if (dic[key] != undefined) {
+            dic[key] += val;
+        }
+    });
     let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
+    for (const key in dic) {
+        vet.push(`(${key} : ${dic[key]})`);
     }
-    return vet.reverse();
+    return vet.join(" - ");
 };
 exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+let b = ["BBAR 150", "CDXE 515", "BKWR 250", "BTSQ 890", "DRTY 600"];
+let c = ["A", "B", "C", "D"];
+let d = G964.stockList(b, c);
 //# sourceMappingURL=app.js.map
