@@ -1,27 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
-    }
-}
-G964.decompose = (n) => {
+function hist(s) {
     // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
+    let dic = s.split('').reduce((u, s) => {
+        if ("uwxz".includes(s)) {
+            if (u[s] == undefined) {
+                u[s] = 1;
+            }
+            else {
+                u[s]++;
+            }
+        }
+        return u;
+    }, {});
+    let arr = [];
+    for (const key in dic) {
+        arr.push(`${key}  ${dic[key]}${' '.repeat(6 - dic[key].toString().length)}${'*'.repeat(dic[key])}`);
     }
-    return vet.reverse();
-};
-exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+    return arr.sort().join('\r');
+}
+exports.hist = hist;
+let r = hist("uuaaaxbbbbyyhwawiwjjjwwxym");
 //# sourceMappingURL=app.js.map
