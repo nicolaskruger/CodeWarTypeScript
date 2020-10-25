@@ -4,41 +4,32 @@ const n = "NORTH";
 const s = "SOUTH";
 const w = "WEST";
 const e = "EAST";
-function giveMeTheList(num, word) {
-    let lis = `${word} `.repeat(Math.abs(num)).split(' ');
-    lis.pop();
-    return lis;
-}
-exports.giveMeTheList = giveMeTheList;
+const oposit = {
+    "NORTH": s,
+    "SOUTH": n,
+    "WEST": e,
+    "EAST": w
+};
 function dirReduc(arr) {
-    let red = arr.reduce((o, x) => {
-        switch (x) {
-            case n:
-                o[0]++;
-                break;
-            case s:
-                o[0]--;
-                break;
-            case e:
-                o[1]++;
-                break;
-            case w:
-                o[1]--;
-                break;
-            default:
-                break;
+    let brr = arr.reduce((o, x) => {
+        let last = o[o.length - 1];
+        if (last == undefined) {
+            o.push(x);
+            return o;
         }
+        let op = oposit[last];
+        if (oposit[last] == x) {
+            o.pop();
+            return o;
+        }
+        o.push(x);
         return o;
-    }, [0, 0]);
-    let w0 = red[0] < 0 ? s : n;
-    let w1 = red[1] < 0 ? w : e;
-    let l0 = giveMeTheList(red[0], w0);
-    let l1 = giveMeTheList(red[1], w1);
-    if (arr.indexOf(w0) < arr.indexOf(w1))
-        return l0.concat(l1);
-    else
-        return l1.concat(l0);
+    }, []);
+    if (brr.length == arr.length) {
+        return arr;
+    }
+    return dirReduc([...brr]);
 }
 exports.dirReduc = dirReduc;
-let red = dirReduc(['NORTH', 'EAST']);
+let red = dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]);
 //# sourceMappingURL=app.js.map
