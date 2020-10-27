@@ -1,27 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
+function subset(arra, arra_size) {
+    var result_set = [], result;
+    for (var x = 0; x < Math.pow(2, arra.length); x++) {
+        result = [];
+        let i = arra.length - 1;
+        do {
+            if ((x & (1 << i)) !== 0) {
+                result.push(arra[i]);
+            }
+        } while (i--);
+        if (result.length >= arra_size) {
+            result_set.push(result);
+        }
     }
+    return result_set;
 }
-G964.decompose = (n) => {
+function chooseBestSum(t, k, ls) {
     // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
-    }
-    return vet.reverse();
-};
-exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+    if (ls.length < k)
+        return null;
+    let arr = subset(ls, k).filter(s => s.length == k).map(s => s.reduce((c, s) => c + s, 0)).filter(s => s <= t);
+    arr.sort();
+    return arr[arr.length - 1];
+}
+exports.chooseBestSum = chooseBestSum;
+let lt = subset([1, 2, 3], 2).filter(s => s.length == 2);
+let t = chooseBestSum(163, 3, [50, 55, 56, 57, 58]);
 //# sourceMappingURL=app.js.map
