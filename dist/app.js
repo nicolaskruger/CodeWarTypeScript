@@ -1,27 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
+function fibo(start, n, func) {
+    for (let i = start.length; i < n; i++) {
+        start.push(func(start));
     }
+    return start;
 }
-G964.decompose = (n) => {
-    // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
-    }
-    return vet.reverse();
-};
-exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+function fibonanci(n) {
+    return fibo([0, 1], n, (arr) => arr.slice(-2).reduce((t, v) => t + v, 0));
+}
+function padovan(n) {
+    return fibo([1, 0, 0], n, (arr) => arr.slice(arr.length - 3, arr.length - 1).reduce((t, v) => t + v, 0));
+}
+function jacob(n) {
+    let ii = [2, 1];
+    return fibo([0, 1], n, (arr) => arr.slice(-2).reduce((t, v, i) => t + ii[i] * v, 0));
+    ;
+}
+function pel(n) {
+    return [];
+}
+function tribonanci(n) {
+    return [];
+}
+function tetrabonanci(n) {
+    return [];
+}
+function mixbonacci(pattern, length) {
+    // Implement me! :)
+    return [];
+}
+exports.mixbonacci = mixbonacci;
+let fib = jacob(30);
 //# sourceMappingURL=app.js.map
