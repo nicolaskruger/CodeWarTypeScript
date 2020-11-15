@@ -1,27 +1,48 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
-    }
+function fact(n) {
+    if (n == 0)
+        return 1;
+    return n * fact(n - 1);
 }
-G964.decompose = (n) => {
-    // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
+function Dec(n) {
+    let map = new Map();
+    for (let s = 2; s <= n; s++) {
+        while (n % s == 0) {
+            if (map.has(s)) {
+                map.set(s, map.get(s) + 1);
+            }
+            else
+                map.set(s, 1);
+            n /= s;
+        }
     }
-    return vet.reverse();
-};
-exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+    return map;
+}
+function conc(a, b) {
+    for (let [key, val] of a.entries()) {
+        if (b.has(key)) {
+            b.set(key, b.get(key) + val);
+        }
+        else {
+            b.set(key, val);
+        }
+    }
+    return b;
+}
+function Fac(n) {
+    let map = new Map();
+    for (let i = 2; i <= n; i++) {
+        map = conc(map, Dec(i));
+    }
+    return map;
+}
+function decomp(n) {
+    let map = Fac(n);
+    let str = [...map.keys()].sort((a, b) => a - b)
+        .map(s => `${s}${(map.get(s) == 1 ? '' : `^${map.get(s)}`)}`);
+    return str.join(" * ");
+}
+exports.decomp = decomp;
+decomp(25);
 //# sourceMappingURL=app.js.map
