@@ -1,17 +1,16 @@
 export function sumPairs(ints: number[], s: number): [number, number] | void { 
-  let best = ints.length;
-  let val:any = undefined;
-  for(let j=0;j<(ints.length-1);j++){
-    for(let i=j+1;i<(ints.length);i++){
-      if((ints[i]+ints[j])==s){
-        if(i<best){
-          best=i;
-          val = [ints[j],ints[i]];
-        }
-      }
+  let set = new Set<number>();
+  if(ints.length<2) return undefined;
+  set.add(ints[0]);
+  for (let i = 1; i < ints.length; i++) {
+    const need = s - ints[i];
+    if(set.has(need)){
+      return [need,ints[i]];
     } 
-  } 
-  return val // your code here...
+    set.add(ints[i]);
+  }
+  
+  return undefined; // your code here...
 }
 
 let val = sumPairs([11, 3, 7, 5],10)
