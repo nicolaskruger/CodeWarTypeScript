@@ -1,27 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
+function sumPairs(ints, s) {
+    let best = ints.length;
+    let val = undefined;
+    for (let j = 0; j < (ints.length - 1); j++) {
+        for (let i = j + 1; i < (ints.length); i++) {
+            if ((ints[i] + ints[j]) == s) {
+                if (i < best) {
+                    best = i;
+                    val = [ints[j], ints[i]];
+                }
+            }
+        }
     }
+    return val; // your code here...
 }
-G964.decompose = (n) => {
-    // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
-    }
-    return vet.reverse();
-};
-exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+exports.sumPairs = sumPairs;
+let val = sumPairs([11, 3, 7, 5], 10);
 //# sourceMappingURL=app.js.map
