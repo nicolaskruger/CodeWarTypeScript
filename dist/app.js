@@ -1,27 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class G964 {
-    static dec(n) {
-        return Math.sqrt(Array.from(Array(n + 1).keys()).map(s => s * s).filter(s => s <= n).pop());
-    }
+function solve(m) {
+    // your code;
+    let a = m;
+    let c = m;
+    let b = -2 * m - 1;
+    return (-b - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
 }
-G964.decompose = (n) => {
-    // your code
-    let vet = [];
-    n = n * n;
-    n--;
-    let m = G964.dec(n);
-    n++;
-    n -= m * m;
-    vet.push(m);
-    while (n > 0) {
-        m = G964.dec(n);
-        n -= m * m;
-        vet.push(m);
-    }
-    return vet.reverse();
-};
-exports.G964 = G964;
-console.log("teste");
-G964.decompose(50);
+exports.solve = solve;
+let val = solve(8);
 //# sourceMappingURL=app.js.map
